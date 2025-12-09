@@ -1,0 +1,716 @@
+/* =====================================================
+   The Hub - Global Styles
+   نظام إدارة Co-Working Space و Entertainment Hub
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================
+   المتغيرات الأساسية - CSS Variables
+   ===================================================== */
+:root {
+    /* ألوان الـ Gradient الأساسي */
+    --hub-red: #E63E32;
+    --hub-orange: #F18A21;
+    --hub-yellow: #F8C033;
+    --gradient-main: linear-gradient(90deg, #E63E32 0%, #F18A21 50%, #F8C033 100%);
+
+    /* ألوان Workspace (احترافي) */
+    --workspace-bg: #0a0a0f;
+    --workspace-card: #12121a;
+    --workspace-primary: #1a1a2e;
+    --workspace-secondary: #16213e;
+    --workspace-accent: #0f3460;
+    --workspace-text: #eaeaea;
+    --workspace-muted: #8b8b8b;
+
+    /* ألوان Entertainment (مطرقعة) */
+    --entertainment-bg: #1a0a0a;
+    --entertainment-card: #2a1010;
+    --entertainment-primary: #E63E32;
+    --entertainment-secondary: #F18A21;
+    --entertainment-accent: #F8C033;
+
+    /* ألوان Glassmorphism */
+    --glass-white: rgba(255, 255, 255, 0.1);
+    --glass-dark: rgba(0, 0, 0, 0.3);
+    --glass-border: rgba(255, 255, 255, 0.18);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+
+    /* Spacing */
+    --navbar-height: 70px;
+    --header-height: 60px;
+}
+
+/* =====================================================
+   الإعدادات الأساسية - Base Styles
+   ===================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    direction: rtl;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    background: var(--workspace-bg);
+    color: var(--workspace-text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* =====================================================
+   تأثيرات Glassmorphism
+   ===================================================== */
+.glass {
+    background: var(--glass-white);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    box-shadow: var(--glass-shadow);
+}
+
+.glass-dark {
+    background: rgba(13, 13, 20, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+}
+
+.glass-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* =====================================================
+   الـ Gradient الأساسي
+   ===================================================== */
+.gradient-main {
+    background: var(--gradient-main);
+}
+
+.gradient-text {
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.gradient-border {
+    position: relative;
+    background: var(--workspace-card);
+    border-radius: 16px;
+}
+
+.gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    border-radius: 16px;
+    background: var(--gradient-main);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+/* =====================================================
+   الأزرار - Buttons
+   ===================================================== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: var(--gradient-main);
+    color: white;
+    box-shadow: 0 4px 15px rgba(230, 62, 50, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(230, 62, 50, 0.6);
+}
+
+.btn-secondary {
+    background: var(--glass-white);
+    color: var(--workspace-text);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--workspace-text);
+}
+
+.btn-ghost:hover {
+    background: var(--glass-white);
+}
+
+.btn-danger {
+    background: #dc2626;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #b91c1c;
+}
+
+/* =====================================================
+   الحقول - Inputs
+   ===================================================== */
+.input {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 16px;
+    font-family: inherit;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: var(--workspace-text);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.input:focus {
+    border-color: var(--hub-orange);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 3px rgba(241, 138, 33, 0.2);
+}
+
+.input::placeholder {
+    color: var(--workspace-muted);
+}
+
+.input-error {
+    border-color: #dc2626;
+}
+
+.input-error:focus {
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+}
+
+/* =====================================================
+   البطاقات - Cards
+   ===================================================== */
+.card {
+    background: var(--workspace-card);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.card-stat {
+    background: linear-gradient(135deg, var(--workspace-card) 0%, var(--workspace-primary) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-stat::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: var(--gradient-main);
+    opacity: 0.1;
+    border-radius: 50%;
+    transform: translate(30%, -30%);
+}
+
+/* =====================================================
+   الجداول - Tables
+   ===================================================== */
+.table-container {
+    overflow-x: auto;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.table th {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 16px;
+    text-align: right;
+    font-weight: 600;
+    color: var(--workspace-muted);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.table td {
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.table tbody tr {
+    transition: background 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* =====================================================
+   الـ Navbar (PWA)
+   ===================================================== */
+.navbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--navbar-height);
+    background: rgba(10, 10, 15, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 16px;
+    z-index: 1000;
+}
+
+.navbar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 16px;
+    color: var(--workspace-muted);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 12px;
+}
+
+.navbar-item.active {
+    color: var(--hub-orange);
+}
+
+.navbar-item.active svg {
+    filter: drop-shadow(0 0 8px rgba(241, 138, 33, 0.5));
+}
+
+.navbar-item-center {
+    width: 56px;
+    height: 56px;
+    background: var(--gradient-main);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -28px;
+    box-shadow: 0 4px 20px rgba(230, 62, 50, 0.4);
+}
+
+/* =====================================================
+   الـ Sidebar (Admin)
+   ===================================================== */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100vh;
+    background: var(--workspace-card);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 24px 16px;
+    overflow-y: auto;
+    z-index: 100;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: var(--workspace-muted);
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    margin-bottom: 4px;
+}
+
+.sidebar-link:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--workspace-text);
+}
+
+.sidebar-link.active {
+    background: var(--gradient-main);
+    color: white;
+}
+
+/* =====================================================
+   الـ Modal
+   ===================================================== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    animation: fadeIn 0.2s ease;
+}
+
+.modal {
+    background: var(--workspace-card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideUp 0.3s ease;
+}
+
+.modal-header {
+    padding: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal-body {
+    padding: 24px;
+}
+
+.modal-footer {
+    padding: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+/* =====================================================
+   الـ Toast / Notifications
+   ===================================================== */
+.toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 16px 24px;
+    background: var(--workspace-card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    z-index: 2000;
+    animation: slideDown 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.toast-success {
+    border-color: #22c55e;
+}
+
+.toast-error {
+    border-color: #dc2626;
+}
+
+.toast-warning {
+    border-color: var(--hub-orange);
+}
+
+/* =====================================================
+   الأنيميشن - Animations
+   ===================================================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fillUp {
+    from {
+        clip-path: inset(100% 0 0 0);
+    }
+
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+/* =====================================================
+   الـ Loading
+   ===================================================== */
+.loading {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--hub-orange);
+    animation: spin 1s linear infinite;
+}
+
+.skeleton {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.05) 25%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.05) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+    border-radius: 8px;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* =====================================================
+   الـ Badges
+   ===================================================== */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.badge-success {
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+}
+
+.badge-warning {
+    background: rgba(241, 138, 33, 0.2);
+    color: var(--hub-orange);
+}
+
+.badge-danger {
+    background: rgba(220, 38, 38, 0.2);
+    color: #dc2626;
+}
+
+.badge-info {
+    background: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+}
+
+/* =====================================================
+   الـ Scrollbar
+   ===================================================== */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* =====================================================
+   رسالة فقدان الاتصال
+   ===================================================== */
+.offline-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 12px;
+    background: #dc2626;
+    color: white;
+    text-align: center;
+    font-weight: 600;
+    z-index: 3000;
+    animation: slideDown 0.3s ease;
+}
+
+.online-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 12px;
+    background: #22c55e;
+    color: white;
+    text-align: center;
+    font-weight: 600;
+    z-index: 3000;
+    animation: slideDown 0.3s ease;
+}
+
+/* =====================================================
+   التوافق مع الموبايل - Mobile Responsive
+   ===================================================== */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(100%);
+        width: 100%;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .table {
+        font-size: 12px;
+    }
+
+    .table th,
+    .table td {
+        padding: 12px 8px;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .btn {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+}
+
+/* =====================================================
+   PWA Safe Areas
+   ===================================================== */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .navbar {
+        padding-bottom: env(safe-area-inset-bottom);
+        height: calc(var(--navbar-height) + env(safe-area-inset-bottom));
+    }
+
+    body {
+        padding-bottom: calc(var(--navbar-height) + env(safe-area-inset-bottom));
+    }
+}
+
+/* =====================================================
+   وضع Entertainment Hub (ألوان مطرقعة)
+   ===================================================== */
+body.entertainment-mode {
+    --workspace-bg: var(--entertainment-bg);
+    --workspace-card: var(--entertainment-card);
+    background: radial-gradient(circle at 50% 0%, rgba(230, 62, 50, 0.15) 0%, transparent 50%),
+        var(--entertainment-bg);
+}
+
+body.entertainment-mode .card {
+    background: linear-gradient(135deg, rgba(230, 62, 50, 0.1) 0%, rgba(241, 138, 33, 0.05) 100%);
+    border-color: rgba(241, 138, 33, 0.2);
+}
